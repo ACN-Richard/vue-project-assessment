@@ -1,3 +1,23 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useCountryStore } from '../stores/countries'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+
+const countriesStore = useCountryStore()
+const countries: any = ref([])
+const currentCountry: any = ref();
+const showModal = ref(false);
+
+const handleCountryData = (name) => {
+  countriesStore.fetchCountryByName(name)
+}
+
+onMounted(async () => {
+  await countriesStore.fetchCountries()
+  countries.value = countriesStore.countries
+})
+</script>
+
 <template>
   <TransitionRoot as="template" :show="showModal">
     <Dialog as="div" class="relative z-10" @close="showModal = false">
@@ -58,24 +78,3 @@
     </li>
   </ul>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useCountryStore } from '../stores/countries'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
-
-const countriesStore = useCountryStore()
-const countries: any = ref([])
-const currentCountry: any = ref();
-const showModal = ref(false);
-
-const handleCountryData = (name) => {
-  countriesStore.fetchCountryByName(name)
-}
-
-onMounted(async () => {
-  await countriesStore.fetchCountries()
-  countries.value = countriesStore.countries
-})
-</script>

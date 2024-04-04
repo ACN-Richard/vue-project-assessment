@@ -4,20 +4,24 @@ import { defineStore } from 'pinia'
 export const useCountryStore = defineStore('country', {
   state: () => ({
     countries: [],
+    isCountriesLoading: false,
+    isCountriesError: null,
+
     countryByName: {},
     loading: false,
     error: null
   }),
   actions: {
     async fetchCountries() {
-      this.loading = true
+      this.isCountriesLoading = true
       try {
         const response = await axios.get('https://restcountries.com/v3.1/all')
         this.countries = response.data
       } catch (error: any) {
-        this.error = error.message
+        console.log('error', error);
+        this.isCountriesError = error.message
       } finally {
-        this.loading = false
+        this.isCountriesLoading = false
       }
     },
     async fetchCountryByName(name: string) {
