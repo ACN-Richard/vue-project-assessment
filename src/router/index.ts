@@ -1,13 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Countries from '../views/Countries.vue'
+import Crud from '../components/Crud.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'countries',
+      component: Countries
+    },
+    {
+      path: '/crud',
+      name: 'crud',
+      component: Crud
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
     }
   ]
 })
