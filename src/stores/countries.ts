@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const useCountryStore = defineStore('country', {
   state: () => ({
     countries: [],
+    countryByName: {},
     loading: false,
     error: null
   }),
@@ -18,6 +19,10 @@ export const useCountryStore = defineStore('country', {
       } finally {
         this.loading = false
       }
+    },
+    async fetchCountryByName(name: string) {
+      const response = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
+      this.countryByName = response.data
     }
   }
 })
