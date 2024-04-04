@@ -14,7 +14,8 @@
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
+              <RouterLink to="/" :class="{ 'active bg-gray-900 text-white': $route.path === '/' }" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">List of Countries</RouterLink>
+              <RouterLink to="/crud" :class="{ 'active bg-gray-900 text-white': $route.path === '/crud' }" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">CRUD</RouterLink>
             </div>
           </div>
         </div>
@@ -32,9 +33,5 @@
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-
-const navigation = [
-  { name: 'Countries', href: '/', current: true },
-  { name: 'CRUD', href: '/crud', current: false }
-]
+import { RouterLink } from 'vue-router'
 </script>
