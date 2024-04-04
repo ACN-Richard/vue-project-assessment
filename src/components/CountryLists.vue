@@ -22,10 +22,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useCountryStore } from '../stores/countries.ts'
+import { useCountryStore } from '../stores/countries'
 
 const countriesStore = useCountryStore()
-const countries = ref([])
+const countries: any = ref([])
 
 onMounted(async () => {
   await countriesStore.fetchCountries()
